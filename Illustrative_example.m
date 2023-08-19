@@ -1,4 +1,4 @@
-%%%%% ×ÛºÏÆÀ¼Û£¨10Äê9ÔÂ18ÈÕ£©
+%%%%% ç»¼åˆè¯„ä»·
 clear,clc
 X(:,:,1)=[66  53  75  67
     72  91  80  81
@@ -17,20 +17,20 @@ X(:,:,4)=[37  48  52  61
     59  62  64  70
     63  73  53  67];
 
-%%%µÚ1²½£¬°´ÁĞ±ê×¼»¯
+%%%ç¬¬1æ­¥ï¼ŒæŒ‰åˆ—æ ‡å‡†åŒ–
 [m,n]=size(X(:,:,1));
 t=4;
-%%%%% µÚ2²½£¬°´ÁĞ¼ÓÈ¨ÖØ
+%%%%% ç¬¬2æ­¥ï¼ŒæŒ‰åˆ—åŠ æƒé‡
 
 disp('w=(0.3 0.3 0.2 0.2)')
 
-disp('ÊôĞÔ¼ÓÈ¨¾ØÕóÎª')
+disp('å±æ€§åŠ æƒçŸ©é˜µä¸º')
 
 w=diag([0.3 0.3 0.2 0.2]);
 
 for k=1:t
   %  X(:,:,k)=X{k};
-  %  X=eval(['X' num2str(k)]);  %%%È¡µÚk¸ö¾ØÕó
+  %  X=eval(['X' num2str(k)]);  %%%å–ç¬¬kä¸ªçŸ©é˜µ
     Y(:,:,k)=X(:,:,k)*w;
     temp=[reshape(Y(:,:,k)',1,[])];
    eval(['Y',num2str(k),'=  sprintf(''%4.2f  %4.2f  %4.2f   %4.2f \n'', temp)'])
@@ -38,21 +38,21 @@ end
 
 %Y
 
-%%% µÚ3²½£¬Çó¼ÓÈ¨¾ØÕóµÄìØ
+%%% ç¬¬3æ­¥ï¼Œæ±‚åŠ æƒçŸ©é˜µçš„ç†µ
 
 for k=1:t 
     P(:,:,k)=Y(:,:,k)./sum(sum(Y(:,:,k)));
     E(k)=-sum(sum(P(:,:,k).*log(P(:,:,k))))/log(m*n);   
 end
 
-disp('YµÄìØÎª')
+disp('Yçš„ç†µä¸º')
 E
 
 % Y_mean = zeros(m,n);
 % for k=1:t
 %     Y_mea = mean(Y(:,:,k),[],3);
 % end
-% disp('ËãÊõÆ½¾ù¾ØÕóÎª')
+% disp('ç®—æœ¯å¹³å‡çŸ©é˜µä¸º')
 % Y_mea
 
 
@@ -62,10 +62,10 @@ E
 % end
 % Y_mean = Y_mean/4;
 % temp=[reshape(Y_mean',1,[])];
-  % eval(['Y_mean''=  %%%ÓÉ´ËËã³öµÄE_meanÊÇ1.7022
+  % eval(['Y_mean''=  %%%ç”±æ­¤ç®—å‡ºçš„E_meanæ˜¯1.7022
 Y_mean=(Y(:,:,1)+Y(:,:,2)+Y(:,:,3)+Y(:,:,4))/4;
 sprintf('%4.2f  %4.2f  %4.2f   %4.2f \n', Y_mean');
-disp('ËãÊõÆ½¾ù¾ØÕóÎª')
+disp('ç®—æœ¯å¹³å‡çŸ©é˜µä¸º')
 Y_mean  
 
 % w=sum(sum(Y_mean))
@@ -77,24 +77,24 @@ for k=1:t
     D(k) =abs( E(k)-E_mean);
     R(k) =E_mean./(E_mean+D(k));
 end
-disp('µÚ4²½£¬Çó4¸öÆ«Àë¶È')
+disp('ç¬¬4æ­¥ï¼Œæ±‚4ä¸ªåç¦»åº¦')
 D, R
 
-disp('²½Öè8£¬weights of DMs Îª£º')
+disp('æ­¥éª¤8ï¼Œweights of DMs ä¸ºï¼š')
 
  lambda=R/sum(R) 
  
-%%%% µÚ9²½£¬½«±ê×¼Õó¼Ó¾ö²ßÕßÈ¨
+%%%% ç¬¬9æ­¥ï¼Œå°†æ ‡å‡†é˜µåŠ å†³ç­–è€…æƒ
 for k=1:t
     G(:,:,k)=Y(:,:,k)*lambda(k);
 end
-disp('µÚ9²½£¬¼ÓÈ¨µ½¸öÈË¾ö²ß¾ØÕó')
+disp('ç¬¬9æ­¥ï¼ŒåŠ æƒåˆ°ä¸ªäººå†³ç­–çŸ©é˜µ')
 G
 
-%%%% ×ª»»³É·½°¸¾ØÕó
-disp('µÚ10²½£¬Èº¾ö²ß¾ØÕó')
+%%%% è½¬æ¢æˆæ–¹æ¡ˆçŸ©é˜µ
+disp('ç¬¬10æ­¥ï¼Œç¾¤å†³ç­–çŸ©é˜µ')
 Gi=permute(G,[3,2,1])
-%%% ·½°¸ÀíÏë½â
+%%% æ–¹æ¡ˆç†æƒ³è§£
 
 for k=1:t
     G_pos = max(Gi,[],3);
@@ -110,10 +110,10 @@ G_neg
 %         Y_right(i,j) = max(H(i,j,:));
 %     end
 % end
-% disp('µÚ3²½£¬Çó3¸öÀíÏë¾ØÕó')
+% disp('ç¬¬3æ­¥ï¼Œæ±‚3ä¸ªç†æƒ³çŸ©é˜µ')
 % Y_left,Y_right
 
-%  µÚ4²½£¬Çó3¸öÆ«Àë¶È
+%  ç¬¬4æ­¥ï¼Œæ±‚3ä¸ªåç¦»åº¦
 G_quare_posi=sum(sum(G_pos.^2));
 G_quare_nega=sum(sum(G_neg.^2));
 for k=1:t
@@ -123,13 +123,13 @@ G_G_posi(k)=sum(sum(Gi(:,:,k).*G_pos));
 G_square(k)=sum(sum(Gi(:,:,k).^2));
 G_G_nega(k)=sum(sum(Gi(:,:,k).*G_neg));
 
- NP_G_G_posi(k)=(1+min(G_square(k),G_quare_posi))./(1+max(G_square(k),G_quare_posi)+abs(G_G_posi(k)-G_quare_posi));%%GÔÚG_{+}ÉÏ±ê×¼»¯Í¶Ó°
- NP_G_G_nega(k)=(1+min(G_square(k),G_quare_nega))./(1+max(G_square(k),G_quare_nega)+abs(G_G_nega(k)-G_quare_nega));%%GÔÚG_{-}ÉÏ±ê×¼»¯Í¶Ó°
+ NP_G_G_posi(k)=(1+min(G_square(k),G_quare_posi))./(1+max(G_square(k),G_quare_posi)+abs(G_G_posi(k)-G_quare_posi));%%Gåœ¨G_{+}ä¸Šæ ‡å‡†åŒ–æŠ•å½±
+ NP_G_G_nega(k)=(1+min(G_square(k),G_quare_nega))./(1+max(G_square(k),G_quare_nega)+abs(G_G_nega(k)-G_quare_nega));%%Gåœ¨G_{-}ä¸Šæ ‡å‡†åŒ–æŠ•å½±
 end
 disp('Group utility measurements')
 NP_G_G_posi, NP_G_G_nega 
 
-% %%% µÚ5²½£¬¼ÆËãÏà¶ÔÌù½ü¶È
+% %%% ç¬¬5æ­¥ï¼Œè®¡ç®—ç›¸å¯¹è´´è¿‘åº¦
 disp('Group utility-based relative closeness')
 RC_1 = NP_G_G_posi./(NP_G_G_posi+NP_G_G_nega)
 
@@ -156,8 +156,8 @@ for k=1:t
  R_R_max(k)=sum(sum(GR(:,:,k).*GR_max));
 R_square(k)=sum(sum(GR(:,:,k).^2));
  R_R_min(k)=sum(sum(GR(:,:,k).*GR_min));
-NP_R_R_max(k)=(1+min(R_square(k),R_max_square))./(1+max(R_square(k),R_max_square)+abs( R_R_max(k)-R_max_square));%% GRÔÚGR_{max}ÉÏ±ê×¼»¯Í¶Ó° 
-NP_R_R_min(k)=(1+min(R_square(k),R_min_square))./(1+max(R_square(k),R_min_square)+abs( R_R_min(k)-R_min_square));%% GRÔÚGR_{min}ÉÏ±ê×¼»¯Í¶Ó°
+NP_R_R_max(k)=(1+min(R_square(k),R_max_square))./(1+max(R_square(k),R_max_square)+abs( R_R_max(k)-R_max_square));%% GRåœ¨GR_{max}ä¸Šæ ‡å‡†åŒ–æŠ•å½± 
+NP_R_R_min(k)=(1+min(R_square(k),R_min_square))./(1+max(R_square(k),R_min_square)+abs( R_R_min(k)-R_min_square));%% GRåœ¨GR_{min}ä¸Šæ ‡å‡†åŒ–æŠ•å½±
 end
 disp('Group regret measurements')
 NP_R_R_max
@@ -188,8 +188,8 @@ for k=1:t
  S_S_max(k)=sum(sum(GS(:,:,k).*GS_max));
  S_square(k)=sum(sum(GS(:,:,k).^2));
  S_S_min(k)=sum(sum(GS(:,:,k).*GS_min));
-NP_S_S_max(k)=(1+min(S_square(k),S_max_square))./(1+max(S_square(k),S_max_square)+abs( S_S_max(k)-S_max_square));%% GRÔÚGR_{max}ÉÏ±ê×¼»¯Í¶Ó° 
-NP_S_S_min(k)=(1+min(S_square(k),S_min_square))./(1+max(S_square(k),S_min_square)+abs( S_S_min(k)-S_min_square));%% GRÔÚGR_{min}ÉÏ±ê×¼»¯Í¶Ó°
+NP_S_S_max(k)=(1+min(S_square(k),S_max_square))./(1+max(S_square(k),S_max_square)+abs( S_S_max(k)-S_max_square));%% GRåœ¨GR_{max}ä¸Šæ ‡å‡†åŒ–æŠ•å½± 
+NP_S_S_min(k)=(1+min(S_square(k),S_min_square))./(1+max(S_square(k),S_min_square)+abs( S_S_min(k)-S_min_square));%% GRåœ¨GR_{min}ä¸Šæ ‡å‡†åŒ–æŠ•å½±
 end
 disp('Group satisfaction measurements')
 NP_S_S_max
@@ -198,12 +198,12 @@ NP_S_S_min
 disp('Group satisfaction-based relative closeness')
 RC_3 = NP_S_S_max./(NP_S_S_max+NP_S_S_min)
 
-%  µÚ7²½£¬¼ÆËã×ÛºÏÆÀ¼Û¾ØÕó
+%  ç¬¬7æ­¥ï¼Œè®¡ç®—ç»¼åˆè¯„ä»·çŸ©é˜µ
 Q_comprehensive = zeros(m,n);
 for k=1:4
     Q_comprehensive = (RC_1 + RC_2+RC_3)/3;
 end
-disp('µÚ7²½£¬¼ÆËã×ÛºÏÆÀ¼Û¾ØÕó')
+disp('ç¬¬7æ­¥ï¼Œè®¡ç®—ç»¼åˆè¯„ä»·çŸ©é˜µ')
 Q_comprehensive
 
 
